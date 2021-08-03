@@ -1,0 +1,32 @@
+from typing import List
+
+
+def checkio(g_r: List[str]) -> str:
+    
+    for line in g_r:
+        if line.count('X') == 3: return 'X'
+        if line.count('O') == 3: return 'O'
+    
+    for column in list(zip(*g_r)):
+        if column.count('X') == 3: return 'X'
+        if column.count('O') == 3: return 'O'
+    
+    if [g_r[0][0], g_r[1][1], g_r[2][2]].count('X') == 3:return 'X'
+    if [g_r[0][0], g_r[1][1], g_r[2][2]].count('O') == 3:return 'O'
+    
+    if [g_r[0][2], g_r[1][1], g_r[2][0]].count('X') == 3:return 'X'
+    if [g_r[0][2], g_r[1][1], g_r[2][0]].count('O') == 3:return 'O'
+    
+    return "D"
+
+
+if __name__ == "__main__":
+    print("Example:")
+    print(checkio(["X.O", "XX.", "XOO"]))
+
+    # These "asserts" using only for self-checking and not necessary for auto-testing
+    assert checkio(["X.O", "XX.", "XOO"]) == "X", "X wins"
+    assert checkio(["OO.", "XOX", "XOX"]) == "O", "O wins"
+    assert checkio(["OOX", "XXO", "OXX"]) == "D", "Draw"
+    assert checkio(["O.X", "XX.", "XOO"]) == "X", "X wins again"
+    print("Coding complete? Click 'Check' to review your tests and earn cool rewards!")
